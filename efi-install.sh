@@ -44,4 +44,4 @@ pacman -Sy  && pacman -S reflector --noconfirm
 reflector --verbose -l 20 -p https --sort rate --save /etc/pacman.d/mirrorlist
 pacstrap /mnt base base-devel linux linux-firmware nano netctl dhcpcd
 genfstab -pU /mnt >> /mnt/etc/fstab
-arch-chroot /mnt sh -c "$(curl -fsSL https://raw.githubusercontent.com/kronsky/archlinux/main/efi-install-part-two.sh)"
+arch-chroot /mnt sh -c "$(curl -fsSL https://raw.githubusercontent.com/kronsky/archlinux/main/install-part-two.sh)"
