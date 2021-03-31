@@ -46,7 +46,7 @@ elif [[ $video == 4 ]]; then
 elif [[ $video == 5 ]]; then
   pacman -S xf86-video-ati mesa lib32-mesa --noconfirm
 elif [[ $video == 0 ]]; then
-  pacman -Sy
+  pacman -S mesa lib32-mesa --noconfirm
 fi
 su $username
 wget git.io/yay.sh && sh yay.sh && rm yay.sh
