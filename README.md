@@ -1,14 +1,12 @@
-# archlinux
-
-h1 заголовок первого уровня
+h1 Установка Arch linux
 =====================
 
-h1 [BIOS установка]
-pacman -Sy && pacman -S wget
-wget https://raw.githubusercontent.com/kronsky/archlinux/main/install.sh
-./install.sh
+### [BIOS установка]
+> pacman -Sy && pacman -S wget
+> wget https://raw.githubusercontent.com/kronsky/archlinux/main/install.sh
+> ./install.sh
 
-[EFI установка]
+### [EFI установка]
 pacman -Sy && pacman -S wget
 wget https://raw.githubusercontent.com/kronsky/archlinux/main/efi-install.sh
 ./efi-install.sh
