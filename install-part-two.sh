@@ -34,7 +34,7 @@ pacman -Syy
 pacman -Syy && sudo pacman -S gnome networkmanager network-manager-applet ppp ttf-liberation ttf-dejavu f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils file-roller p7zip unrar gvfs aspell-ru git curl wget mc htop reflector chrome-gnome-shell vivaldi ranger gnome-tweaks telegram-desktop zsh gimp libreoffice-fresh-ru screenfetch atom rhythmbox --noconfirm
 systemctl enable gdm NetworkManager
 echo "какой драйвер на графику ставить?"
-read -p "0 - вируталка, 1 - intel, 2 - nvidia свободный, 3 - nvidia проприетарный, 4 - amd новые gpu, 5 - amd старые gpu,  - nvidia свободный: " video
+read -p "0 - вируталка, 1 - intel, 2 - nvidia свободный, 3 - nvidia проприетарный, 4 - amd новые gpu, 5 - amd старые gpu, 6 - nvidia свободный: " video
 if [[ $video == 1 ]]; then
   pacman -S xf86-video-intel mesa lib32-mesa --noconfirm
 elif [[ $video == 2 ]]; then
