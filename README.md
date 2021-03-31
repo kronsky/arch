@@ -1,6 +1,9 @@
 # archlinux
 
-[BIOS установка]
+h1 заголовок первого уровня
+=====================
+
+h1 [BIOS установка]
 pacman -Sy && pacman -S wget
 wget https://raw.githubusercontent.com/kronsky/archlinux/main/install.sh
 ./install.sh
