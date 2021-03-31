@@ -23,12 +23,11 @@ echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
 echo '[multilib]' >> /etc/pacman.conf
 echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf
 pacman -Syy
-sudo pacman -Syy && sudo pacman -S gnome networkmanager network-manager-applet ppp ttf-liberation ttf-dejavu f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils file-roller p7zip unrar gvfs aspell-ru git curl wget mc htop reflector chrome-gnome-shell vivaldi ranger gnome-tweaks telegram-desktop zsh gimp libreoffice-fresh-ru screenfetch atom rhythmbox --noconfirm
-sudo systemctl enable gdm NetworkManager
-wget git.io/yay.sh && sh yay.sh && rm yay.sh
-yay -S pamac-all zsh-fast-syntax-highlighting zsh-autosuggestions timeshift youtube-dl
-yay -S matcha-gtk-theme-git papirus-maia-icon-theme-git paper-icon-theme-git capitaine-cursors
-
+pacman -Syy && sudo pacman -S gnome networkmanager network-manager-applet ppp ttf-liberation ttf-dejavu f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils file-roller p7zip unrar gvfs aspell-ru git curl wget mc htop reflector chrome-gnome-shell vivaldi ranger gnome-tweaks telegram-desktop zsh gimp libreoffice-fresh-ru screenfetch atom rhythmbox --noconfirm
+systemctl enable gdm NetworkManager
+#wget git.io/yay.sh && sh yay.sh && rm yay.sh
+#yay -S pamac-all zsh-fast-syntax-highlighting zsh-autosuggestions timeshift youtube-dl
+#yay -S matcha-gtk-theme-git papirus-maia-icon-theme-git paper-icon-theme-git capitaine-cursors
 echo "какой драйвер на графику ставить?"
 read -p "0 - вируталка, 1 - intel, 2 - nvidia свободный, 3 - nvidia проприетарный, 4 - amd новые gpu, 5 - amd старые gpu,  - nvidia свободный: " video
 if [[ $video == 1 ]]; then
