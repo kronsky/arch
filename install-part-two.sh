@@ -11,9 +11,17 @@ echo 'KEYMAP=ru' >> /etc/vconsole.conf
 echo 'FONT=cyr-sun16' >> /etc/vconsole.conf
 mkinitcpio -p linux
 pacman -Syy
-pacman -S grub --noconfirm
-grub-install /dev/$disk
-grub-mkconfig -o /boot/grub/grub.cfg
+echo "загрузчик bios или efi?"
+read -p "1 - bios, 2 - efi: " loader
+if [[ $loader == 1 ]]; then
+  pacman -S grub --noconfirm
+  grub-install /dev/$disk
+  grub-mkconfig -o /boot/grub/grub.cfg
+elif [[ $loader == 2 ]]; then
+  pacman -S grub efibootmgr --noconfirm
+  grub-install /dev/$disk
+  grub-mkconfig -o /boot/grub/grub.cfg
+fi
 useradd -m -g users -G wheel -s /bin/bash $username
 echo 'пароль root'
 passwd
