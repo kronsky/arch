@@ -48,7 +48,4 @@ elif [[ $video == 5 ]]; then
 elif [[ $video == 0 ]]; then
   pacman -S mesa lib32-mesa --noconfirm
 fi
-su $username
-wget git.io/yay.sh && sh yay.sh && rm yay.sh
-yay -S pamac-all timeshift youtube-dl
 echo 'установка завершена! делай ребут.'
