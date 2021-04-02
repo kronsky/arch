@@ -30,7 +30,6 @@ passwd $username
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
 echo '[multilib]' >> /etc/pacman.conf
 echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf
-pacman -Syy
 pacman -Syy && sudo pacman -S gnome networkmanager network-manager-applet ppp ttf-liberation ttf-dejavu f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils file-roller p7zip unrar gvfs aspell-ru git curl wget mc htop reflector chrome-gnome-shell vivaldi ranger gnome-tweaks telegram-desktop zsh gimp libreoffice-fresh-ru screenfetch atom rhythmbox --noconfirm
 systemctl enable gdm NetworkManager
 echo "какой драйвер на графику ставить?"
@@ -46,6 +45,5 @@ elif [[ $video == 4 ]]; then
 elif [[ $video == 5 ]]; then
   pacman -S xf86-video-ati mesa lib32-mesa --noconfirm
 elif [[ $video == 0 ]]; then
-  pacman -S mesa lib32-mesa --noconfirm
 fi
 echo 'установка завершена! делай ребут.'
