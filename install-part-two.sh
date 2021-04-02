@@ -23,9 +23,9 @@ elif [[ $loader == 2 ]]; then
   grub-mkconfig -o /boot/grub/grub.cfg
 fi
 useradd -m -g users -G wheel -s /bin/bash $username
-echo 'пароль root'
+echo 'пароль root: '
 passwd
-echo 'пароль пользователя'
+echo 'пароль пользователя $username: '
 passwd $username
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
 echo '[multilib]' >> /etc/pacman.conf
