@@ -3,10 +3,10 @@
 
 ### [BIOS установка]
 * pacman -Sy && pacman -S wget
-* wget raw.githubusercontent.com/kronsky/arch-install/main/bios-install.sh
+* wget https://raw.githubusercontent.com/kronsky/arch/main/bios-install.sh
 * ./install.sh
 
 ### [EFI установка]
 * pacman -Sy && pacman -S wget
-* wget raw.githubusercontent.com/kronsky/arch-install/main/efi-install.sh
+* wget https://raw.githubusercontent.com/kronsky/arch/main/efi-install.sh
 * ./efi-install.sh
