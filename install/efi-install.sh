@@ -13,13 +13,11 @@ read -p "Какого размера будет root раздел? (в гига�
   echo;
   echo +500M;
   echo y;
-  echo w;
   echo n;
   echo;
   echo;
   echo "+"$root"G;"
   echo y;
-  echo w;
   echo n;
   echo;
   echo;
