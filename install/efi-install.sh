@@ -1,8 +1,8 @@
 #!/bin/bash
 loadkeys ru
 setfont cyr-sun16
-echo 'На какое утройство устанавливать (например sda)?'
-read disk
+read -p "На какое утройство устанавливать систему? /dev/ " disk
+read -p "Какого размера будет root раздел? (в гигабайтах): " root
 (
   echo g;
   echo w;
@@ -12,18 +12,16 @@ read disk
   echo;
   echo;
   echo +500M;
-  echo y;
   echo n;
   echo;
   echo;
-  echo +40G;
-  echo y;
+  echo "+"$root"G;"
   echo n;
   echo;
   echo;
   echo;
-  echo y;
   echo t;
+  echo 1;
   echo 1;
   echo w;
 ) | fdisk /dev/$disk
