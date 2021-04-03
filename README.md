@@ -1,6 +1,6 @@
 Установка Arch linux
 =====================
 
-* curl -OL https://git.io/kronsky-arch.sh
-* chmod +x install.sh
-* ./install.sh
+* curl -OL git.io/kronsky-arch.sh
+* chmod +x kronsky-arch.sh
+* ./kronsky-arch.sh
