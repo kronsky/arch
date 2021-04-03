@@ -13,16 +13,25 @@ read -p "Какого размера будет root раздел? (в гига�
   echo;
   echo +500M;
   echo y;
+  echo w;
+) | fdisk /dev/$disk
+(
   echo n;
   echo;
   echo;
-  echo "+"$root"G;"
+  echo +"$root"G;
   echo y;
+  echo w;
+) | fdisk /dev/$disk
+(
   echo n;
   echo;
   echo;
   echo;
   echo y;
+  echo w;
+) | fdisk /dev/$disk
+(  
   echo t;
   echo 1;
   echo 1;
