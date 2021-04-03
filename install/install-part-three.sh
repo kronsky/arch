@@ -7,7 +7,10 @@ echo $userpass;
 rm yay.sh
 yay -S pamac-all timeshift youtube-dl zsh-fast-syntax-highlighting zsh-autosuggestions --noconfirm
 echo $userpass;
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+#sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+#echo;
+#echo $userpass;
+curl -L http://install.ohmyz.sh | sh
 git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 git clone https://github.com/kronsky/arch.git
 cp -f ~/arch/config/.alias_zsh ~/
