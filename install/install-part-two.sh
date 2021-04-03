@@ -1,8 +1,13 @@
 #!/bin/bash
-echo "##################################################################"
+echo "####################################################################################"
 read -p "Имя компьютера: " hostname
 read -p "Имя пользователя: " username
+read -p "Пароль root: " rootpass
+read -p "Пароль пользователя "$username": " userpass
 read -p "На какое утройство устанавливать загрузчик? /dev/" disk
+echo "Загрузчик bios или efi?"
+read -p "1 - bios, 2 - efi: " loader
+
 echo $hostname > /etc/hostname
 ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 echo -e "en_US.UTF-8 UTF-8\nru_RU.UTF-8 UTF-8" >> /etc/locale.gen
@@ -12,9 +17,6 @@ echo 'KEYMAP=ru' >> /etc/vconsole.conf
 echo 'FONT=cyr-sun16' >> /etc/vconsole.conf
 mkinitcpio -p linux
 pacman -Syy
-echo "##################################################################"
-echo "Загрузчик bios или efi?"
-read -p "1 - bios, 2 - efi: " loader
 if [[ $loader == 1 ]]; then
   pacman -S grub --noconfirm
   grub-install /dev/$disk
@@ -25,20 +27,33 @@ elif [[ $loader == 2 ]]; then
   grub-mkconfig -o /boot/grub/grub.cfg
 fi
 useradd -m -g users -G wheel -s /bin/bash $username
-echo "##################################################################"
-echo "Пароль root: "
-passwd
-echo "##################################################################"
-echo "Пароль пользователя "$username": "
-passwd $username
-echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
-echo '[multilib]' >> /etc/pacman.conf
-echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf
-echo "##################################################################"
+
+(
+  echo $rootpass;
+  echo $rootpass;
+) | passwd
+(
+  echo $userpass;
+  echo $userpass;
+) | passwd $username
+
+#echo "Пароль root: "
+#passwd
+#echo "Пароль пользователя "$username": "
+#passwd $username
+
+echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
+echo "[multilib]" >> /etc/pacman.conf
+echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
+echo "####################################################################################"
 echo "Установлена чистая система Arch, продолжаем установку DE и программ?"
 read -p "1 - Продолжаем установку, 0 - Нет, я хочу чистый арч " next
 if [[ $next == 0 ]]; then
-  echo "Установлена чистая система Arch, можно перезагружать компьютер"
+  echo ""
+  echo "####################################################################################"
+  echo "#########  Установлена чистая система Arch, можно перезагружать компьютер  #########"
+  echo "####################################################################################"
+  echo ""
 elif [[ $next == 1 ]]; then
   echo "Продолжаем установку"
   echo "Какой DE ставим?"
@@ -50,7 +65,7 @@ elif [[ $next == 1 ]]; then
     pacman -Syy && sudo pacman -S kf5 kf5-aids plasma kdebase gwenview
   fi
   pacman -Syy && sudo pacman -S ppp ttf-liberation ttf-dejavu f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils file-roller p7zip unrar gvfs aspell-ru git curl wget mc htop reflector ranger zsh screenfetch vivaldi telegram-desktop gimp libreoffice-fresh-ru atom --noconfirm
-  echo "##################################################################"
+  echo "####################################################################################"
   echo "Какой графический драйвер ставить?"
   read -p "0 - Вируталка, 1 - Intel, 2 - Nvidia свободный, 3 - Nvidia проприетарный, 4 - AMD новые gpu, 5 - AMD старые gpu " video
   if [[ $video == 1 ]]; then
