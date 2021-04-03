@@ -27,7 +27,6 @@ elif [[ $loader == 2 ]]; then
   grub-mkconfig -o /boot/grub/grub.cfg
 fi
 useradd -m -g users -G wheel -s /bin/bash $username
-
 (
   echo $rootpass;
   echo $rootpass;
@@ -36,17 +35,14 @@ useradd -m -g users -G wheel -s /bin/bash $username
   echo $userpass;
   echo $userpass;
 ) | passwd $username
-
-#echo "Пароль root: "
-#passwd
-#echo "Пароль пользователя "$username": "
-#passwd $username
-
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 echo "[multilib]" >> /etc/pacman.conf
 echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
+echo ""
 echo "####################################################################################"
-echo "Установлена чистая система Arch, продолжаем установку DE и программ?"
+echo "######  Установлена чистая система Arch, продолжаем установку DE и программ?  ######"
+echo "####################################################################################"
+echo ""
 read -p "1 - Продолжаем установку, 0 - Нет, я хочу чистый арч " next
 if [[ $next == 0 ]]; then
   echo ""
@@ -58,13 +54,16 @@ elif [[ $next == 1 ]]; then
   echo "Продолжаем установку"
   echo "Какой DE ставим?"
   read -p "1 - Gnome, 2 - KDE " de
+  pacman -Syy
   if [[ $de == 1 ]]; then
-    pacman -Syy && sudo pacman -S gnome networkmanager network-manager-applet chrome-gnome-shell gnome-tweaks rhythmbox --noconfirm
-    systemctl enable gdm NetworkManager
+    sudo pacman -S gnome chrome-gnome-shell gnome-tweaks rhythmbox --noconfirm
+    systemctl enable gdm
   elif [[ $de == 2 ]]; then
-    pacman -Syy && sudo pacman -S kf5 kf5-aids plasma kdebase gwenview
+    sudo pacman -S plasma-desktop plasma-wayland-session sddm kde-applications --noconfirm
+    systemctl enable sddm
   fi
-  pacman -Syy && sudo pacman -S ppp ttf-liberation ttf-dejavu f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils file-roller p7zip unrar gvfs aspell-ru git curl wget mc htop reflector ranger zsh screenfetch vivaldi telegram-desktop gimp libreoffice-fresh-ru atom --noconfirm
+  sudo pacman -S networkmanager network-manager-applet ppp ttf-liberation ttf-dejavu f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils file-roller p7zip unrar gvfs aspell-ru git curl wget mc htop reflector ranger zsh screenfetch vivaldi telegram-desktop gimp libreoffice-fresh-ru atom --noconfirm
+  systemctl enable NetworkManager
   echo "####################################################################################"
   echo "Какой графический драйвер ставить?"
   read -p "0 - Вируталка, 1 - Intel, 2 - Nvidia свободный, 3 - Nvidia проприетарный, 4 - AMD новые gpu, 5 - AMD старые gpu " video
