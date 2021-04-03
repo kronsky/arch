@@ -1,7 +1,7 @@
 #!/bin/bash
 loadkeys ru
 setfont cyr-sun16
-read -p "На какое утройство устанавливать систему? /dev/ " disk
+read -p "На какое утройство устанавливать систему? /dev/" disk
 read -p "Какого размера будет root раздел? (в гигабайтах): " root
 read disk
 (

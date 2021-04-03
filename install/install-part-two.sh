@@ -1,7 +1,7 @@
 #!/bin/bash
 read -p "введи имя компьютера: " hostname
 read -p "введи имя пользователя: " username
-read -p "на какое утройство устанавливать загрузчик (например sda)?: " disk
+read -p "На какое утройство устанавливать загрузчик? /dev/" disk
 echo $hostname > /etc/hostname
 ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 echo -e "en_US.UTF-8 UTF-8\nru_RU.UTF-8 UTF-8" >> /etc/locale.gen
@@ -11,7 +11,8 @@ echo 'KEYMAP=ru' >> /etc/vconsole.conf
 echo 'FONT=cyr-sun16' >> /etc/vconsole.conf
 mkinitcpio -p linux
 pacman -Syy
-echo "загрузчик bios или efi?"
+echo "##################################################################"
+echo "Загрузчик bios или efi?"
 read -p "1 - bios, 2 - efi: " loader
 if [[ $loader == 1 ]]; then
   pacman -S grub --noconfirm
@@ -23,16 +24,19 @@ elif [[ $loader == 2 ]]; then
   grub-mkconfig -o /boot/grub/grub.cfg
 fi
 useradd -m -g users -G wheel -s /bin/bash $username
-echo 'пароль root: '
+echo "##################################################################"
+echo "Вводим пароль root: "
 passwd
-echo 'пароль пользователя $username: '
+echo "##################################################################"
+echo 'Вводим пароль пользователя $username: '
 passwd $username
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
 echo '[multilib]' >> /etc/pacman.conf
 echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf
 pacman -Syy && sudo pacman -S gnome networkmanager network-manager-applet ppp ttf-liberation ttf-dejavu f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils file-roller p7zip unrar gvfs aspell-ru git curl wget mc htop reflector chrome-gnome-shell vivaldi ranger gnome-tweaks telegram-desktop zsh gimp libreoffice-fresh-ru screenfetch atom rhythmbox --noconfirm
 systemctl enable gdm NetworkManager
-echo "какой драйвер на графику ставить?"
+echo "##################################################################"
+echo "Какой драйвер на графику ставить?"
 read -p "0 - вируталка, 1 - intel, 2 - nvidia свободный, 3 - nvidia проприетарный, 4 - amd новые gpu, 5 - amd старые gpu, 6 - nvidia свободный: " video
 if [[ $video == 1 ]]; then
   pacman -S xf86-video-intel mesa lib32-mesa --noconfirm
@@ -47,15 +51,5 @@ elif [[ $video == 5 ]]; then
 elif [[ $video == 0 ]]; then
   pacman -Sy
 fi
-
 su $username
-#устанока zsh, плагинов и тем
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-yay -S zsh-fast-syntax-highlighting zsh-autosuggestions
-git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-#темы gtk
-yay -S matcha-gtk-theme-git papirus-maia-icon-theme-git paper-icon-theme-git capitaine-cursors
-wget git.io/yay.sh && sh yay.sh && rm yay.sh
-yay -S pamac-all timeshift youtube-dl
-
-echo 'установка завершена! делай ребут.'
+su $username sh -c "$(curl -fsSL https://raw.githubusercontent.com/kronsky/arch/main/install/install-part-three.sh)"

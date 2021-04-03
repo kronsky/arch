@@ -2,11 +2,11 @@
 =====================
 
 ### [BIOS установка]
-* pacman -Sy && pacman -S wget
-* wget https://raw.githubusercontent.com/kronsky/arch/main/install/bios-install.sh
-* ./install.sh
+* curl -OL https://raw.githubusercontent.com/kronsky/arch/main/install/bios-install.sh
+* chmod +x bios-install.sh
+* ./bios-install.sh
 
 ### [EFI установка]
-* pacman -Sy && pacman -S wget
-* wget https://raw.githubusercontent.com/kronsky/arch/main/install/efi-install.sh
+* curl -OL https://raw.githubusercontent.com/kronsky/arch/main/install/efi-install.sh
+* chmod +x efi-install.sh
 * ./efi-install.sh
