@@ -48,7 +48,7 @@ elif [[ $video == 0 ]]; then
   pacman -Sy
 fi
 
-sudo -u $username
+su $username
 #устанока zsh, плагинов и тем
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 yay -S zsh-fast-syntax-highlighting zsh-autosuggestions
