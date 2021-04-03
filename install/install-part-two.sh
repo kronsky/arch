@@ -1,6 +1,7 @@
 #!/bin/bash
-read -p "введи имя компьютера: " hostname
-read -p "введи имя пользователя: " username
+echo "##################################################################"
+read -p "Имя компьютера: " hostname
+read -p "Имя пользователя: " username
 read -p "На какое утройство устанавливать загрузчик? /dev/" disk
 echo $hostname > /etc/hostname
 ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
@@ -25,31 +26,45 @@ elif [[ $loader == 2 ]]; then
 fi
 useradd -m -g users -G wheel -s /bin/bash $username
 echo "##################################################################"
-echo "Вводим пароль root: "
+echo "Пароль root: "
 passwd
 echo "##################################################################"
-echo 'Вводим пароль пользователя $username: '
+echo "Пароль пользователя "$username": "
 passwd $username
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
 echo '[multilib]' >> /etc/pacman.conf
 echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf
-pacman -Syy && sudo pacman -S gnome networkmanager network-manager-applet ppp ttf-liberation ttf-dejavu f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils file-roller p7zip unrar gvfs aspell-ru git curl wget mc htop reflector chrome-gnome-shell vivaldi ranger gnome-tweaks telegram-desktop zsh gimp libreoffice-fresh-ru screenfetch atom rhythmbox --noconfirm
-systemctl enable gdm NetworkManager
 echo "##################################################################"
-echo "Какой драйвер на графику ставить?"
-read -p "0 - вируталка, 1 - intel, 2 - nvidia свободный, 3 - nvidia проприетарный, 4 - amd новые gpu, 5 - amd старые gpu, 6 - nvidia свободный: " video
-if [[ $video == 1 ]]; then
-  pacman -S xf86-video-intel mesa lib32-mesa --noconfirm
-elif [[ $video == 2 ]]; then
-  pacman -S xf86-video-nouveau mesa lib32-mesa --noconfirm
-elif [[ $video == 3 ]]; then
-  pacman -S nvidia nvidia-utils lib32-nvidia-utils --noconfirm
-elif [[ $video == 4 ]]; then
-  pacman -S xf86-video-amdgpu mesa lib32-mesa --noconfirm
-elif [[ $video == 5 ]]; then
-  pacman -S xf86-video-ati mesa lib32-mesa --noconfirm
-elif [[ $video == 0 ]]; then
-  pacman -Sy
+echo "Установлена чистая система Arch, продолжаем установку DE и программ?"
+read -p "1 - Продолжаем установку, 0 - Нет, я хочу чистый арч " next
+if [[ $next == 0 ]]; then
+  echo "Установлена чистая система Arch, можно перезагружать компьютер"
+elif [[ $next == 1 ]]; then
+  echo "Продолжаем установку"
+  echo "Какой DE ставим?"
+  read -p "1 - Gnome, 2 - KDE " de
+  if [[ $de == 1 ]]; then
+    pacman -Syy && sudo pacman -S gnome networkmanager network-manager-applet chrome-gnome-shell gnome-tweaks rhythmbox --noconfirm
+    systemctl enable gdm NetworkManager
+  elif [[ $de == 2 ]]; then
+    pacman -Syy && sudo pacman -S kf5 kf5-aids plasma kdebase gwenview
+  fi
+  pacman -Syy && sudo pacman -S ppp ttf-liberation ttf-dejavu f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils file-roller p7zip unrar gvfs aspell-ru git curl wget mc htop reflector ranger zsh screenfetch vivaldi telegram-desktop gimp libreoffice-fresh-ru atom --noconfirm
+  echo "##################################################################"
+  echo "Какой графический драйвер ставить?"
+  read -p "0 - Вируталка, 1 - Intel, 2 - Nvidia свободный, 3 - Nvidia проприетарный, 4 - AMD новые gpu, 5 - AMD старые gpu " video
+  if [[ $video == 1 ]]; then
+    pacman -S xf86-video-intel mesa lib32-mesa --noconfirm
+  elif [[ $video == 2 ]]; then
+    pacman -S xf86-video-nouveau mesa lib32-mesa --noconfirm
+  elif [[ $video == 3 ]]; then
+    pacman -S nvidia nvidia-utils lib32-nvidia-utils --noconfirm
+  elif [[ $video == 4 ]]; then
+    pacman -S xf86-video-amdgpu mesa lib32-mesa --noconfirm
+  elif [[ $video == 5 ]]; then
+    pacman -S xf86-video-ati mesa lib32-mesa --noconfirm
+  elif [[ $video == 0 ]]; then
+    echo "Пропускаем ..."
+  fi
+  su $username sh -c "$(curl -fsSL https://raw.githubusercontent.com/kronsky/arch/main/install/install-part-three.sh)"
 fi
-su $username
-su $username sh -c "$(curl -fsSL https://raw.githubusercontent.com/kronsky/arch/main/install/install-part-three.sh)"
