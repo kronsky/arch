@@ -23,7 +23,7 @@ alias ysn="yay --noconfirm"
 alias yr="yay -R"
 alias yrs="yay -Rs"
 alias upd="yay -Sy"
-alias upg="yay -Syu"
+alias upg="yay -Syu --noconfirm"
 
 wtr () {
   curl "wttr.in/Gomel?M$1npQ&lang=ru"
