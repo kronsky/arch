@@ -4,9 +4,9 @@ read -p "Имя компьютера: " hostname
 read -p "Имя пользователя: " username
 read -p "Пароль root: " rootpass
 read -p "Пароль пользователя "$username": " userpass
-read -p "На какое утройство устанавливать загрузчик? /dev/" disk
-echo "Загрузчик bios или efi?"
-read -p "1 - bios, 2 - efi: " loader
+#read -p "На какое утройство устанавливать загрузчик? /dev/" disk
+#echo "Загрузчик bios или efi?"
+#read -p "1 - bios, 2 - efi: " loader
 
 echo $hostname > /etc/hostname
 ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
@@ -17,13 +17,13 @@ echo 'KEYMAP=ru' >> /etc/vconsole.conf
 echo 'FONT=cyr-sun16' >> /etc/vconsole.conf
 mkinitcpio -p linux
 pacman -Syy
-if [[ $loader == 1 ]]; then
+if [[ $2 == 1 ]]; then
   pacman -S grub --noconfirm
-  grub-install /dev/$disk
+  grub-install /dev/$1
   grub-mkconfig -o /boot/grub/grub.cfg
-elif [[ $loader == 2 ]]; then
+elif [[ $2 == 2 ]]; then
   pacman -S grub efibootmgr --noconfirm
-  grub-install /dev/$disk
+  grub-install /dev/$1
   grub-mkconfig -o /boot/grub/grub.cfg
 fi
 useradd -m -g users -G wheel -s /bin/bash $username
