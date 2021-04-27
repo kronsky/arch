@@ -38,14 +38,14 @@ if [[ $loader == 1 ]]; then
     echo 1;
     echo w;
   ) | fdisk /dev/$disk
-  if [[ $disktype == sd ]]; then
-    volume1="${disk}1"
-    volume2="${disk}2"
-    volume3="${disk}3"
-  elif [[ $disktype == nv ]]; then
+  if [[ $disktype == nv ]]; then
     volume1="${disk}p1"
     volume2="${disk}p2"
     volume3="${disk}p3"
+  else
+    volume1="${disk}1"
+    volume2="${disk}2"
+    volume3="${disk}3"
   fi 
   echo y | mkfs.ext2  /dev/$volume1 -L boot
   echo y | mkfs.ext4  /dev/$volume2 -L root
@@ -89,14 +89,14 @@ elif [[ $loader == 2 ]]; then
     echo 1;
     echo w;
   ) | fdisk /dev/$disk
-  if [[ $disktype == sd ]]; then
-    volume1="${disk}1"
-    volume2="${disk}2"
-    volume3="${disk}3"
-  elif [[ $disktype == nv ]]; then
+  if [[ $disktype == nv ]]; then
     volume1="${disk}p1"
     volume2="${disk}p2"
     volume3="${disk}p3"
+  else
+    volume1="${disk}1"
+    volume2="${disk}2"
+    volume3="${disk}3"
   fi  
   echo y | mkfs.fat -F32 /dev/$volume1
   echo y | mkfs.ext4  /dev/$volume2
