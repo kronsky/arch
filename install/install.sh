@@ -24,16 +24,19 @@ if [[ $loader == 1 ]]; then
     echo;
     echo;
     echo +100M;
+    echo y;
     echo n;
     echo;
     echo;
     echo;
     echo "+"$root"G;"
+    echo y;
     echo n;
-    echo p;
     echo;
     echo;
     echo;
+    echo;
+    echo y;
     echo a;
     echo 1;
     echo w;
