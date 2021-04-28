@@ -66,7 +66,7 @@ elif [[ $next == 1 ]]; then
   systemctl enable NetworkManager
   echo "####################################################################################"
   echo "Какой графический драйвер ставить?"
-  read -p "0 - Вируталка, 1 - Intel, 2 - Nvidia свободный, 3 - Nvidia проприетарный, 4 - AMD новые gpu, 5 - AMD старые gpu " video
+  read -p "0 - Вируталка, 1 - Intel, 2 - Nvidia свободный, 3 - Nvidia проприетарный, 4 - AMD новые gpu, 5 - AMD старые gpu: ->> " video
   if [[ $video == 1 ]]; then
     pacman -S xf86-video-intel mesa lib32-mesa --noconfirm
   elif [[ $video == 2 ]]; then
@@ -80,5 +80,5 @@ elif [[ $next == 1 ]]; then
   elif [[ $video == 0 ]]; then
     echo "Пропускаем ..."
   fi
-  su $username sh -c "$(curl -fsSL https://raw.githubusercontent.com/kronsky/arch/main/install/install-part-three.sh)"
+  su $username sh -c "$(curl -fsSL https://raw.githubusercontent.com/kronsky/arch/main/install/config.sh)" 0 $userpass
 fi
