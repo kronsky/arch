@@ -1,6 +1,5 @@
 #!/bin/bash
-read -p "Пароль пользователя: " userpass
-
+#read -p "Пароль пользователя: " userpass
 #sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 #echo;
 #echo $userpass;
