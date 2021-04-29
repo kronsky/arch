@@ -75,7 +75,8 @@ if [[ $next == 1 ]]; then
     echo "Пропускаем ..."
   fi
   #su $username sh -c "$(curl -fsSL https://raw.githubusercontent.com/kronsky/arch/main/install/config.sh)" 0 $userpass
-  curl -fsSL https://raw.githubusercontent.com/kronsky/arch/main/install/config.sh
+  curl -OL https://raw.githubusercontent.com/kronsky/arch/main/install/config.sh
+  chmod +x config.sh
 fi
 echo ""
 echo "####################################################################################"

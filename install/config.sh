@@ -4,20 +4,16 @@
 #echo;
 #echo $userpass;
 curl -L http://install.ohmyz.sh | sh
-git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+sudo git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 git clone https://github.com/kronsky/arch.git
 cp -f ~/arch/config/.alias_zsh ~/
 cp -f ~/arch/config/.p10k.zsh ~/
 cp -f ~/arch/config/.zshrc ~/
 
-
-#wget git.io/yay.sh
-#sh yay.sh
-#echo $userpass;
-#rm yay.sh
-#yay -S pamac-all timeshift youtube-dl zsh-fast-syntax-highlighting zsh-autosuggestions --noconfirm
-#echo $userpass;
-
+wget git.io/yay.sh
+sh yay.sh
+rm yay.sh
+yay -S pamac-all timeshift youtube-dl zsh-fast-syntax-highlighting zsh-autosuggestions --noconfirm
 
 echo "Установить темы GTK?"
 read -p "1 - да, 0 - нет: " themes
