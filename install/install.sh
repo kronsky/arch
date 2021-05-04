@@ -41,7 +41,8 @@ if [[ $loader == 1 ]]; then
     echo 1;
     echo w;
   ) | fdisk /dev/$disk
-  if [[ $disktype == nv ]]; then
+  
+  if [ $disktype == nv ] || [ $disktype == mm ]; then
     volume1="${disk}p1"
     volume2="${disk}p2"
     volume3="${disk}p3"
@@ -92,7 +93,7 @@ elif [[ $loader == 2 ]]; then
     echo 1;
     echo w;
   ) | fdisk /dev/$disk
-  if [[ $disktype == nv ]]; then
+  if [ $disktype == nv ] || [ $disktype == mm ]; then
     volume1="${disk}p1"
     volume2="${disk}p2"
     volume3="${disk}p3"
