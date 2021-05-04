@@ -38,6 +38,7 @@ useradd -m -g users -G wheel -s /bin/bash $username
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 echo "[multilib]" >> /etc/pacman.conf
 echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
+sudo pacman -S networkmanager ppp ttf-liberation ttf-dejavu f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils alsa-plugins file-roller p7zip unrar gvfs aspell-ru git curl wget mc htop reflector ranger zsh screenfetch --noconfirm
 echo ""
 echo "####################################################################################"
 echo "######  Установлена чистая система Arch, продолжаем установку DE и программ?  ######"
@@ -56,7 +57,7 @@ if [[ $next == 1 ]]; then
     sudo pacman -S plasma-desktop plasma-wayland-session sddm konsole plasma-nm gwenview dolphin plasma-pa powerdevil kscreen kde-gtk-config breeze-gtk sddm-kcm --noconfirm
     systemctl enable sddm
   fi
-  sudo pacman -S networkmanager ppp ttf-liberation ttf-dejavu f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils alsa-plugins file-roller p7zip unrar gvfs aspell-ru git curl wget mc htop reflector ranger zsh screenfetch vivaldi telegram-desktop gimp libreoffice-fresh-ru atom --noconfirm
+  sudo pacman -S vivaldi telegram-desktop gimp libreoffice-fresh-ru atom --noconfirm
   systemctl enable NetworkManager
   echo "####################################################################################"
   echo "Какой графический драйвер ставить?"
