@@ -38,6 +38,7 @@ useradd -m -g users -G wheel -s /bin/bash $username
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 echo "[multilib]" >> /etc/pacman.conf
 echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
+sudo reflector --verbose -l 20 -p https --sort rate --save /etc/pacman.d/mirrorlist
 sudo pacman -Syy
 sudo pacman -S networkmanager ppp ttf-liberation ttf-dejavu f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils alsa-plugins file-roller p7zip unrar gvfs aspell-ru git curl wget mc htop reflector ranger zsh screenfetch --noconfirm
 echo ""
