@@ -1,9 +1,6 @@
 #!/bin/bash
-#read -p "Пароль пользователя: " userpass
-#sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-#echo;
-#echo $userpass;
-curl -L http://install.ohmyz.sh | sh
+
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 sudo git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 git clone https://github.com/kronsky/arch.git
 cp -f ~/arch/config/.alias_zsh ~/

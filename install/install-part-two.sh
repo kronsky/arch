@@ -38,6 +38,7 @@ useradd -m -g users -G wheel -s /bin/bash $username
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 echo "[multilib]" >> /etc/pacman.conf
 echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
+sudo pacman -Syy
 sudo pacman -S networkmanager ppp ttf-liberation ttf-dejavu f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils alsa-plugins file-roller p7zip unrar gvfs aspell-ru git curl wget mc htop reflector ranger zsh screenfetch --noconfirm
 echo ""
 echo "####################################################################################"
@@ -49,7 +50,6 @@ if [[ $next == 1 ]]; then
   echo "Продолжаем установку"
   echo "Какой DE ставим?"
   read -p "1 - Gnome, 2 - KDE " de
-  pacman -Syy
   if [[ $de == 1 ]]; then
     sudo pacman -S gnome chrome-gnome-shell gnome-tweaks rhythmbox network-manager-applet --noconfirm
     systemctl enable gdm
