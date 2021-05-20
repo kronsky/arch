@@ -2,7 +2,7 @@
 loadkeys ru
 setfont cyr-sun16
 echo "Загрузчик bios или efi?"
-read -p "1 - bios, 2 - efi: " loader
+read -p "1 - bios, 2 - efi -->> " loader
 fdisk -l
 read -p "На какое утройство устанавливать систему? /dev/" disk
 disktype=; for n in $disk; do disktype+=${n::2}; done
@@ -10,9 +10,26 @@ echo ""
 echo "#####################################################################################"
 echo "#####  На системном диске будет создан загрузочный раздел, root и home разделы.  ####"
 echo "####  После создания раздела root, home займёт все оставшиеся пространство диска ####"
-echo "####################################################################################"
+echo "#####################################################################################"
 echo ""
 read -p "Какого размера будет root раздел? (в гигабайтах): " root
+echo "#####################################################################################"
+read -p "Имя компьютера: " hostname
+read -p "Имя пользователя: " username
+read -p "Пароль root: " rootpass
+read -p "Пароль пользователя "$username": " userpass
+echo "Будем ставить окружение и графические драйвера?"
+read -p "1 - Да, 0 - Нет, я хочу чистый арч -->> " depo
+if [[ $depo == 1 ]]; then
+  echo "Какое окружение будем ставить?"
+  read -p "1 - Gnome, 2 - KDE  -->> " de
+  echo "Какой графический драйвер ставить?"
+  read -p "0 - Вируталка, 1 - Intel, 2 - Nvidia свободный, 3 - Nvidia проприетарный, 4 - AMD новые gpu, 5 - AMD старые gpu: -->> " video
+elif [[ $depo == 0 ]]; then
+  de = 0
+  video = 0
+fi
+echo "#####################################################################################"
 if [[ $loader == 1 ]]; then
   (
     echo o;
@@ -117,4 +134,6 @@ pacman -Sy  && pacman -S reflector --noconfirm
 reflector --verbose -l 20 -p https --sort rate --save /etc/pacman.d/mirrorlist
 pacstrap /mnt base base-devel linux linux-firmware nano netctl dhcpcd
 genfstab -pU /mnt >> /mnt/etc/fstab
-arch-chroot /mnt sh -c "$(curl -fsSL https://raw.githubusercontent.com/kronsky/arch/main/install/install-part-two.sh)" 0 $disk $loader
+arch-chroot /mnt sh -c "$(curl -fsSL \
+  https://raw.githubusercontent.com/kronsky/arch/main/install/install-part-two.sh)" \
+  0 $disk $loader $hostname $username $rootpass $userpass $depo $de $video
