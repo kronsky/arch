@@ -7,9 +7,9 @@ cp -f ~/arch/config/.alias_zsh ~/
 cp -f ~/arch/config/.p10k.zsh ~/
 cp -f ~/arch/config/.zshrc ~/
 
-wget git.io/yay.sh
-sh yay.sh
-rm yay.sh
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
 yay -S pamac-all timeshift youtube-dl zsh-fast-syntax-highlighting zsh-autosuggestions --noconfirm
 
 echo "Установить темы GTK?"
