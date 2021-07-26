@@ -36,7 +36,7 @@ sudo pacman -S networkmanager ppp ttf-liberation ttf-dejavu f2fs-tools dosfstool
   git curl wget mc htop reflector ranger zsh screenfetch --noconfirm
 if [[ $7 == 1 ]]; then
   if [[ $8 == 1 ]]; then
-    sudo pacman -S gnome chrome-gnome-shell gnome-tweaks rhythmbox network-manager-applet --noconfirm
+    sudo pacman -S gnome gnome-tweaks rhythmbox network-manager-applet --noconfirm
     systemctl enable gdm
   elif [[ $8 == 2 ]]; then
     sudo pacman -S plasma-desktop plasma-wayland-session sddm konsole plasma-nm \
