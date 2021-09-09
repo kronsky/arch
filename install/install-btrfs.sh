@@ -52,12 +52,6 @@ function fuefi {
     echo y;
     echo w;
   ) | fdisk /dev/$disk
-  (
-    echo t;
-    echo 1;
-    echo 1;
-    echo w;
-  ) | fdisk /dev/$disk
 
   if [ $disktype == nv ] || [ $disktype == mm ]; then
     volume1="${disk}p1"

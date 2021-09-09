@@ -11,14 +11,3 @@ git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 yay -S pamac-all timeshift youtube-dl zsh-fast-syntax-highlighting zsh-autosuggestions --noconfirm
-
-echo "Установить темы GTK?"
-read -p "1 - да, 0 - нет: " themes
-if [[ $themes == 1 ]]; then
-  yay -S matcha-gtk-theme-git papirus-maia-icon-theme-git paper-icon-theme-git capitaine-cursors --noconfirm
-  echo $1;
-fi
-
-echo "####################################################################################"
-echo "#####################  Все готово, можно перезагружать компьютер  ##################"
-echo "####################################################################################"
