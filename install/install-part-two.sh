@@ -29,11 +29,9 @@ useradd -m -g users -G wheel -s /bin/bash $4
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 echo "[multilib]" >> /etc/pacman.conf
 echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
-sudo reflector --verbose -l 20 -p https --sort rate --save /etc/pacman.d/mirrorlist
-sudo pacman -Syy
-sudo pacman -S networkmanager ppp ttf-liberation ttf-dejavu f2fs-tools dosfstools \
-  ntfs-3g alsa-lib alsa-utils alsa-plugins file-roller p7zip unrar gvfs aspell-ru \
-  git curl wget mc htop reflector ranger zsh screenfetch --noconfirm
+pacman -Sy  && pacman -S reflector --noconfirm
+reflector --verbose -c Russia -a 5 --sort rate --save /etc/pacman.d/mirrorlist
+sudo pacman -Syy && sudo pacman -S networkmanager ppp ttf-liberation ttf-dejavu f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils alsa-plugins file-roller p7zip unrar gvfs aspell-ru  git curl wget mc htop reflector ranger zsh screenfetch --noconfirm
 if [[ $7 == 1 ]]; then
   if [[ $8 == 1 ]]; then
     sudo pacman -S gnome gnome-tweaks rhythmbox network-manager-applet --noconfirm
@@ -43,7 +41,7 @@ if [[ $7 == 1 ]]; then
     gwenview dolphin plasma-pa powerdevil kscreen kde-gtk-config breeze-gtk sddm-kcm --noconfirm
     systemctl enable sddm
   fi
-  sudo pacman -S vivaldi telegram-desktop gimp libreoffice-fresh-ru atom --noconfirm
+  sudo pacman -S firefox telegram-desktop gimp libreoffice-fresh-ru --noconfirm
   systemctl enable NetworkManager
   if [[ $9 == 1 ]]; then
     pacman -S xf86-video-intel mesa lib32-mesa --noconfirm
@@ -58,8 +56,6 @@ if [[ $7 == 1 ]]; then
   elif [[ $9 == 0 ]]; then
     echo "Пропускаем ..."
   fi
-  curl -OL https://raw.githubusercontent.com/kronsky/arch/main/install/config.sh
-  chmod +x config.sh
 fi
 echo ""
 echo "####################################################################################"
