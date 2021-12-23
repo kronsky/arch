@@ -6,9 +6,7 @@
 * ./kronsky-arch.sh
 
 Для установки по wi-fi:
-Смотрим имя адаптера:
-* ip link
-Подключаемся через Wi-fi:
+* ip link # cмотрим имя адаптера
 * iwctl
 * station device connect SSID
 (SSID - имя сети, device - имя адаптера)
